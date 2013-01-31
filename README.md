@@ -6,7 +6,7 @@ An implementation of the LIX readability measure, in C. Read [here](http://wiki.
 This project uses the scons build system, so just execute `scons` from your checkout area.
 
 ## License
-Copyright 2013 Alex Collins (alexcollins.org)
+Copyright 2013 Alex Collins [http://alexcollins.org/](alexcollins.org)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
