@@ -1,6 +1,6 @@
 # clix
 
-An implementation of the LIX readability measure, in C.
+An implementation of the LIX readability measure, in C. Read [here](http://wiki.alexcollins.org/articles/Learning_Programming_Languages#LIX_Calculator) and [here](http://en.wikipedia.org/wiki/LIX) for more information on LIX.
 
 ## Building
 This project uses the scons build system, so just execute `scons` from your checkout area.
