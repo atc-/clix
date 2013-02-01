@@ -13,7 +13,7 @@ float lix(const char *str);
 
 void err(const char *msg, const int exitVal);
 
-const size_t MAX_CHARS = 1000;
+const int MAX_CHARS = 1000;
 
 /*
  * Expects a filename to parse as the one and only argument.
@@ -23,7 +23,6 @@ int main(const int argc, const char *argv[]) {
 	
 	/* the string we read in */
 	char *buf = malloc(sizeof(char) * MAX_CHARS); // 1000 to start with
-	int i = 0;
 	const char *filename = argv[1];
 	FILE *fp;
 	fp = fopen(filename, "r");
@@ -31,11 +30,19 @@ int main(const int argc, const char *argv[]) {
 	if (fp != NULL) {
 		printf("Opened %s\n", filename);
 
-		while (i++ <= MAX_CHARS && (buf[i] = fgetc(fp)) != EOF) {
-			printf("Read %s", buf[i]);
+		int i = 0, numPeriods = 0, numWords = 0, numLongWords = 0;
+
+		while ((buf[i] = fgetc(fp)) != EOF && i <= MAX_CHARS) {
+			if (isPeriod(buf[i])) numPeriods++;
+			i++;
 		}
 
 		fclose(fp);
+
+		printf("numWords = %d\n", numWords);
+		printf("numPeriods = %d\n", numPeriods);
+		printf("numLongWords = %d\n", numLongWords);
+
 	} else {
 		char *fmtStr = "Couldn't open %s\n";
 		char *str = malloc(sizeof(char) * (strlen(fmtStr) + strlen(filename)));
@@ -57,10 +64,10 @@ float lix(const char *str) {
 }
 
 /*
- * Return true if c is . or ,
+ * Return true if c is A-Z, a . or ,
  */
 bool isPeriod(const char c) {
-	return c == '.' || c == ',';
+	return (c >= 65 && c <= 90) || c == '.' || c == ',';
 }
 
 int numberOfPeriods(const char *str) {
