@@ -21,6 +21,9 @@ const int MAX_CHARS = 1000;
 int main(const int argc, const char *argv[]) {
 	if (argc != 2) err("Please provide a file name to parse", 255);
 	
+	char *exitStr;
+	int exitVal = 0;
+
 	/* the string we read in */
 	char *buf = malloc(sizeof(char) * MAX_CHARS); // 1000 to start with
 	const char *filename = argv[1];
@@ -44,15 +47,13 @@ int main(const int argc, const char *argv[]) {
 		printf("numLongWords = %d\n", numLongWords);
 
 	} else {
-		char *fmtStr = "Couldn't open %s\n";
-		char *str = malloc(sizeof(char) * (strlen(fmtStr) + strlen(filename)));
-		sprintf(str, fmtStr, filename);
-		err(str, 254);  // str not free()'d
+		exitStr = "Couldn't open file";
+		exitVal = 254;
 	}
 
 	free(buf);
 
-	return 0;
+	err(exitStr, exitVal);
 }
 
 /*
